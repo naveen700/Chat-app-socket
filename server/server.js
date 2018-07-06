@@ -18,12 +18,39 @@ var io = socketIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => { // when client gets connected
-
+    // generally we do not attach anything to io other then connecct
 
     console.log('user connected');
+    // socket.emit('newEmail', {
+    //     from: 'naveenrana921@gmail.com',
+    //     text: 'simple text message',
+    //     createAt: new Date
+
+
+
+    // }); //scoket.emit is used to fire the evnets
+
+    // socket.on('createEmail', (newMail) => {
+    //     console.log('created email event',newMail );
+
+    // });
+ 
+    socket.emit('newMessageEvent', {
+        from :'naveen rana',
+        text : 'hii this is naveen',
+        createdAt :  new Date().getTime() 
+
+    } )
+
+    socket.on('createMessageEvent' , (message) => {
+        console.log(message);
+
+    }) 
     socket.on('disconnect', () => {
         console.log('user is disconnected');
     });
+
+
 
 
 })
