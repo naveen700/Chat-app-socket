@@ -26,7 +26,21 @@ io.on('connection', (socket) => { // when client gets connected
     //     text: 'simple text message',
     //     createAt: new Date
 
+    socket.emit('newMessageEvent', {
+        from: 'admin',
+        text: 'welcome to fb chat app'
+    });
 
+    socket.broadcast.emit('newMessageEvent', {
+        from: 'admin',
+        text: 'new user joined',
+        createdAt: new Date().getTime()
+
+
+    })
+
+
+  
 
     // }); //scoket.emit is used to fire the evnets
 
@@ -43,8 +57,8 @@ io.on('connection', (socket) => { // when client gets connected
     // })
 
     socket.on('createMessageEvent', (message) => {
-        console.log(message);
-// io.emit is used to broadcast to every user connected to the server
+        //console.log(message);
+        // io.emit is used to broadcast to every user connected to the server
         io.emit('newMessageEvent',  {
             from : message.from
             ,text : message.text,
@@ -52,6 +66,13 @@ io.on('connection', (socket) => { // when client gets connected
 
 
         })
+        //to broacast to other  socket to ourself
+        // socket.broadcast.emit('newMessageEvent', {
+        //     from: message.from,
+        //     text: message.text,
+        //     createdAt: new Date().getTime()
+        // })
+        
 
 
     })
