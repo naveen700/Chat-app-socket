@@ -34,18 +34,27 @@ io.on('connection', (socket) => { // when client gets connected
     //     console.log('created email event',newMail );
 
     // });
- 
-    socket.emit('newMessageEvent', {
-        from :'naveen rana',
-        text : 'hii this is naveen',
-        createdAt :  new Date().getTime() 
 
-    } )
+    // socket.emit('newMessageEvent', {
+    //     from: 'naveen rana',
+    //     text: 'hii this is naveen',
+    //     createdAt: new Date().getTime()
 
-    socket.on('createMessageEvent' , (message) => {
+    // })
+
+    socket.on('createMessageEvent', (message) => {
         console.log(message);
+// io.emit is used to broadcast to every user connected to the server
+        io.emit('newMessageEvent',  {
+            from : message.from
+            ,text : message.text,
+            createdAt: new Date().getTime()
 
-    }) 
+
+        })
+
+
+    })
     socket.on('disconnect', () => {
         console.log('user is disconnected');
     });

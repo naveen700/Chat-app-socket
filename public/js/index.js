@@ -13,17 +13,17 @@ socket.on('disconnect', function () {
 
 socket.on('newMessageEvent', (message) => {
 
-    console.log(message.from + message.text);
+    console.log(message.from + message.text  + message.createdAt);
 
 
 
 })
 
 
-socket.emit('createMessageEvent' , {
-        from : 'praveen',
-        text: 'yup hey nassada'
-});
+// socket.emit('createMessageEvent' , {
+//         from : 'praveen',
+//         text: 'yup hey nassada'
+// });
 
 // socket.emit('createEmail', {
 //     to: 'shivamshakya91@gmail.com',
