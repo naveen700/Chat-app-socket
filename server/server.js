@@ -8,7 +8,9 @@ const port = process.env.PORT || 3000;
 const socketIO = require('socket.io');
 const publicPath = path.join(__dirname, '../public');
 // console.log(publicPath);
-
+const {
+    generateMessage
+} = require('./utils/message');
 var app = express();
 
 var server = http.createServer(app);
@@ -26,21 +28,12 @@ io.on('connection', (socket) => { // when client gets connected
     //     text: 'simple text message',
     //     createAt: new Date
 
-    socket.emit('newMessageEvent', {
-        from: 'admin',
-        text: 'welcome to fb chat app'
-    });
+    socket.emit('newMessageEvent', generateMessage('Admin', 'welcome to chat app'));
 
-    socket.broadcast.emit('newMessageEvent', {
-        from: 'admin',
-        text: 'new user joined',
-        createdAt: new Date().getTime()
+    socket.broadcast.emit('newMessageEvent',generateMessage('admin' , 'new user joined'));
 
 
-    })
 
-
-  
 
     // }); //scoket.emit is used to fire the evnets
 
@@ -56,23 +49,17 @@ io.on('connection', (socket) => { // when client gets connected
 
     // })
 
-    socket.on('createMessageEvent', (message) => {
+    socket.on('createMessageEvent', (message,callback) => {
         //console.log(message);
         // io.emit is used to broadcast to every user connected to the server
-        io.emit('newMessageEvent',  {
-            from : message.from
-            ,text : message.text,
-            createdAt: new Date().getTime()
-
-
-        })
+        io.emit('newMessageEvent', generateMessage(message.from, message.text))
         //to broacast to other  socket to ourself
         // socket.broadcast.emit('newMessageEvent', {
         //     from: message.from,
         //     text: message.text,
         //     createdAt: new Date().getTime()
         // })
-        
+        callback('this is the from server');
 
 
     })

@@ -6,12 +6,41 @@
         <title>SocketIO</title> 
 
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <style>
+             * {
+                 margin : auto;
+                 padding: auto;
+
+             }
+
+
+
+
+        </style>
+
 
     </head>
 
 
 
     <body>
+        
+        <ul id="messages">
+            
+        </ul>
+
+
+        <form action="" class="form" id="message-form">
+            <div>
+            <input type="text" name="message" class="form-control" placeholder="message"  />
+            <button class="btn btn-lg btn-primary">Send</button>
+            </div>    
+
+
+        </form>
+
 
         <h3>This is First Socket IO</h3>
         <p>Welcome to Chat App</p>
@@ -19,8 +48,9 @@
 
 
         <script  src="./socket.io/socket.io.js"    >    </script>
+        <script  src="./libs/jquery-3.3.1.min.js " ></script>
         <script  src="./js/index.js"  ></script>
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     </body>
 

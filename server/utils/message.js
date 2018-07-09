@@ -10,4 +10,4 @@ var generateMessage = (from , text) => {
 
 
 }
-moduule.exports= {generateMessage};
+module.exports= {generateMessage};

@@ -11,13 +11,36 @@ socket.on('disconnect', function () {
 
 // })
 
+
+
 socket.on('newMessageEvent', (message) => {
 
-    console.log(message.from + message.text  + message.createdAt);
+   // console.log(message.from + message.text + message.createdAt);
+    var li = jQuery('<li></li>');// to create element using jquery
+    li.text(`${message.from}: ${message.text}`); // to add contet to element
 
+    jQuery('#messages').append(li);
 
 
 })
+
+//using jquery here
+// we can use selector jQuery or the $ --> both are selector
+jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault();
+    socket.emit('createMessageEvent', {
+            from: 'user',
+            text: $('[name = message]').val()
+        }, function () {
+
+        }
+
+    )
+
+
+});
+
+
 
 
 // socket.emit('createMessageEvent' , {
@@ -29,3 +52,13 @@ socket.on('newMessageEvent', (message) => {
 //     to: 'shivamshakya91@gmail.com',
 //     msg: 'hi how are you doing'
 // });
+
+// to broadcast 
+// socket.emit('createMessageEvent', {
+//     from: 'naveen',
+//     text: 'Heyy',
+
+// }, function (data) {
+//     console.log('Got it,', data);
+
+// })
