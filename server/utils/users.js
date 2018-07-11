@@ -42,11 +42,10 @@ class Users {
     removeUser(id) {
         //remove the user by id
         var user = this.getUser(id);
-        
+        console.log(user);
         
         if (user) {
-            this.users = this.users.filter((userss) => {
-                userss.id !== id});
+            this.users = this.users.filter((userss) =>userss.id !== id);
         } 
        
 
